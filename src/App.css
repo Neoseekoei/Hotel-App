@@ -1,0 +1,810 @@
+
+.plain {
+    margin: 180px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+  border: 3px solid #f1f1f1;
+  width: 35%;
+  background-color: #A87539;
+  margin: 25vh auto 13px auto;
+  height: 500px;
+  border-radius: 25px;
+  flex-shrink: 0;
+  
+}
+
+.sign_in_form{
+  border: 3px solid #f1f1f1;
+  width: 35%;
+  background-color: #A87539;
+  margin: 25vh auto 13px auto;
+  height: 620px;
+  border-radius: 25px;
+  flex-shrink: 0;
+  
+}
+
+
+input  {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  
+
+}
+
+.divtwo {
+  background-color: #D8BB83;
+  
+  
+}
+
+
+
+button {
+  background-color: rgb(196, 188, 188);
+  color: white;
+  /* padding: 14px 20px; */
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  align-items: center;
+  margin-left: 220px;
+  
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+  width: 450px;
+
+}
+
+span.psw {
+  float: right;
+  padding-top: 75px;
+  padding-left: 400px;
+  color: rgb(255, 251, 251);
+}
+
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+}
+
+
+.background {
+  background:url("./Assets/images//full-shot-man-carrying-baggage.jpg");
+  background-size: cover;
+  height: 100vh;
+}
+
+.welcome-container {
+  text-align: center;
+  
+  /* margin-top: 100px; */
+  font-family: Arial, sans-serif;
+  background-color: rgb(245, 245, 245, 50%);
+  padding-top: 50px;
+  padding-bottom: 50px;
+ 
+
+}
+
+h1 {
+  font-size: 36px;
+  color: #333;
+}
+
+p {
+  font-size: 18px;
+  color: #666;
+}
+
+.loginbutton {
+  width: 125px;
+  border-radius: 25px;
+  height: 50px;
+  font-weight: 1000;
+  font-size: medium;
+  color: white;
+  margin-left: -38px;
+  background-color: #ac804e;
+}
+
+
+
+
+
+/* * {box-sizing: border-box} */
+
+
+
+.container {
+  padding: 16px;
+  width: 80%;
+  height: 2590;
+  
+ 
+}
+
+.register {
+  margin-left: 150px;
+}
+
+.rtext {
+  font-size: px;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+.registerbtn {
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 16px 20px;
+  margin-left: 20%;
+  border: none;
+  cursor: pointer;
+  width: 200px;
+  opacity: 0.9;
+  
+}
+
+.registerbtn:hover {
+  opacity:1;
+}
+
+a {
+  color: dodgerblue;
+}
+
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+p {
+  font-size: 16px;
+}
+
+
+
+.forgot-password-container {
+  text-align: center;
+  margin-top: 100px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 36px;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+label {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+input {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 300px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #A87539;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 120px;
+  height: 50px;
+  margin-left: 50px;
+}
+
+button:hover {
+  background-color: black;
+}
+
+
+
+
+
+.nav-bar {
+  background-color: #D8BB83;
+  color: rgb(184, 49, 49);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  height: 128px;
+  
+  
+}
+
+nav {
+  margin-left: 60%;
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: center;
+}
+
+ul {
+  color: '#B3B3B3';
+font-size: 17;
+font-family: 'Hammersmith One';
+font-weight: '400';
+word-wrap: 'break-word';
+margin: 0 auto 50px auto ;
+}
+
+.now {
+  padding-top: 15px;
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+  border-radius: 25px;
+  background: #A87539;
+  margin-bottom: -30px;
+  
+
+}
+
+img {
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+  /* display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center; */
+  margin-right: 1490px;
+
+
+}
+
+/* .pics {
+  width: 1344px;
+  height: 1070px;
+} */
+
+.link {
+ border-width: 1px;
+
+ 
+  
+}
+
+.the-form {
+  width: 75%;
+height: 150px;
+flex-shrink: 0;
+border-radius: 25px;
+background: #ffff;
+margin-top: -550px;
+position: absolute;
+z-index: 1px;
+margin-left: 250px;
+
+
+display: flex;
+flex-direction: row;
+align-items: end;
+justify-content: center;
+}
+
+.logout {
+  background-color: #A87539;
+  margin: 50px;
+  margin-left: 200px;
+}
+
+.pics{
+ align-items: left;
+ margin-left: -1150px;
+ 
+}
+
+.KING {
+  margin-top: 462px;
+}
+  
+
+.signB {
+  margin-left: -38px;
+  background-color: #ac804e;
+}
+
+
+.contact-Container{
+ 
+  align-content: center;
+  justify-content: center;
+}
+
+.main2 {
+  display: flex;
+}
+  
+.left {
+  background-color: #ccc;
+}
+
+.right {
+  background-color: #A87539;
+}
+
+.title2 {
+  text-align: center;
+  margin-top: -280px;
+  margin-bottom: -100px;
+}
+
+.image-container {
+  background-image: url('./Assets/images/home.jpg');
+  width: 700px;
+  height: 700px;
+  background-size: cover;
+  margin-left: 70px;
+  z-index: 20px;
+}
+
+.middleDiv {
+  display: flex;
+  margin-top: 90px;
+}
+
+.text {
+  width: 400px;
+  margin-left: 250px;
+  font-weight: 700;
+  color: black;
+  font-size: 20px;
+}
+
+.therddiv {
+  background-color: whitesmoke;
+}
+
+.titletext{ 
+  width: 350px;
+  margin-left: 250px;
+  font-weight: 700;
+  color: black;
+  font-size: 60px;
+}
+
+.logo {
+  height: 60px;
+  width: 60px;
+}
+
+.subtitles {
+  color: #A87539;
+}
+
+.para{
+  width: 700px;
+  font-weight: 500;
+
+}
+
+.hit{
+ display: flex;
+ justify-content: center;
+}
+
+.hit2{
+display: flex;
+justify-content: center;
+}
+
+.paragraph{
+  width: 450px;
+  font-weight: 500;
+}
+
+.leftParagraph{
+  margin-left: 90px;
+}
+
+.features {
+  justify-content: center;
+}
+
+.imagesdiv{
+  flex-wrap: wrap;
+  width: 35rem;
+  height: 40rem;
+ 
+  margin-bottom: 80px;
+  
+}
+
+.imgdiv1{
+  display: flex;
+  margin-right: 1rem;
+  width: 15rem;
+  height: 15rem;
+}
+
+.imgdiv2{
+  display: flex;
+}
+
+.feature1 {
+  background-image: url(../src/Assets/images/Rectangle\ 6.png);
+  width: 400px;
+  height: 303px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-size: cover;
+}
+
+.featureText1 {
+  width: 302px;
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: 0px solid #000;
+  background: rgba(217, 217, 217, 0.50);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  align-self: center;
+  
+}
+
+.feature2 {
+  background-image: url(../src/Assets/images/parking-valet-helping-woman-park-her-car.jpg);
+  width: 400px;
+  height: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-size: cover;
+}
+
+.featureText2 {
+  width: 392px;
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: 0px solid #000;
+  background: rgba(217, 217, 217, 0.50);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  align-self: center;
+  
+}
+
+.feature3 {
+  background-image: url(../src/Assets/images/Events.jfif);
+  width: 400px;
+  height: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-size: cover;
+}
+
+.featureText3 {
+  width: 392px;
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: 0px solid #000;
+  background: rgba(217, 217, 217, 0.50);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  align-self: center;
+}
+
+.feature4 {
+  background-image: url(../src/Assets/images/young-hotel-maid-setting-up-pillow-bed.jpg);
+  width: 400px;
+  height: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-size: cover;
+}
+
+.featureText4 {
+  width: 392px;
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: 0px solid #000;
+  background: rgba(217, 217, 217, 0.50);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  align-self: center;
+}
+
+
+.feature5 {
+  background-image: url(../src/Assets/images/banquet-table-with-snacks.jpg);
+  width: 400px;
+  height: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-size: cover;
+}
+
+.featureText5 {
+  width: 392px;
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: 0px solid #000;
+  background: rgba(217, 217, 217, 0.50);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  align-self: center;
+}
+
+.feature6 {
+  background-image: url(../src/Assets/images/type-entertainment-complex-popular-resort-with-pools-water-parks-turkey-with-more-than-5-million-visitors-year-amara-dolce-vita-luxury-hotel-resort-tekirova-kemer.jpg);
+  width: 400px;
+  height: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-size: cover;
+}
+
+.featureText6 {
+  width: 392px;
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: 0px solid #000;
+  background: rgba(217, 217, 217, 0.50);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  align-self: center;
+}
+
+.mainfeatures{
+  display: flex;
+}
+
+.mainfeatures2{
+  display: flex;
+}
+
+.everyfeature{
+  margin-left: 330px;
+}
+
+.Featureheader{
+  text-align: center;
+}
+
+.contact{
+  display: flex;
+}
+
+
+.imgAct4{
+  background-image: url(../src/Assets/icons/whatsapp.png);
+  width: 50px;
+  height: 50px;
+}
+
+.imgAct5{
+  background-image: url(../src/Assets/icons/facebook.png);
+  width: 50px;
+  height: 50px;
+}
+
+.imgAct6{
+  background-image: url(../src/Assets/icons/twitter.png);
+  width: 50px;
+  height: 50px;
+}
+
+.imgAct7{
+  background-image: url(../src/Assets/icons/email.png);
+  width: 50px;
+  height: 50px;
+}
+
+
+.footer{
+  background-color: #A87539;
+}
+
+
+.act{
+  margin-left: 650px;
+  
+}
+
+
+.main2{
+  display: flex;
+  justify-content: center;
+ 
+}
+
+.contact-Container{
+  background-color: gray;
+}
+
+.left{
+  width: 30%;
+  height: 40rem;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  background-color: white;
+}
+
+.right{
+  width: 20%;
+  height: 40rem;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.contactus{
+  color: #666;
+  text-align: center;
+}
+
+
+.inputscontact{
+  align-content: center;
+  margin-top: 50px;
+}
+
+.inputsall{
+ border-color: white;
+ border-bottom-color: lightgray;
+ background-color: white;
+ margin-left: 25%;
+ margin-top: 40px;
+ border-width: 2px;
+}
+
+.contactButton{
+  border-radius: 20px;
+  margin-left: 40%;
+  margin-top: 40px;
+}
+
+
+
+
+
+
+
+.features-title{
+  text-align: center;
+  font-family: 'Nosifer';
+  font-size: 50px;
+}
+
+.feature-div{
+  display: flex;
+}
+
+.subfeatures{
+  color: #A87539;
+}
+
+.featureParagraph{
+  font-weight: 500;
+  width: 500px;
+}
+
+.Features{
+  margin-left: 100px;
+}
+
+.alldivs{
+  margin-left: 60px;
+}
+
+.first-title{
+  text-align: center;
+  color: #A87539;
+}
+
+
+
+
+
+
