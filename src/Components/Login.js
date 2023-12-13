@@ -1,91 +1,135 @@
-import React from 'react'
-import { useNavigate , Link } from "react-router-dom";
-import {signInWithEmailAndPassword} from 'firebase/auth'
-import { useState } from 'react';
-import { auth } from '../config/firebase'
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../config/firebase';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
 
-//   const[email, setEmail] = useState('');
-//   const[password, setPassword] = useState('')
+  const validateForm = () => {
+    // Trim leading and trailing whitespaces from email and password
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
 
-//   const login = (() =>{
-//  signInWithEmailAndPassword(auth, email, password).then(() =>{
+    // Check if email or password is empty after trimming
+    if (!trimmedEmail || !trimmedPassword) {
+      setError('Please fill out all fields.');
+      return false;
+    }
 
-//   alert('Log In successfully');
+    // Email validation
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    if (!emailRegex.test(trimmedEmail)) {
+      setError('Please enter a valid email address.');
+      return false;
+    }
 
-//  }).catch((error)=>{
-//   console.log(error.massage)
+    // Password strength validation
+    const minPasswordLength = 6;
+    if (trimmedPassword.length < minPasswordLength) {
+      setError(`Password must be at least ${minPasswordLength} characters long.`);
+      return false;
+    }
 
-//  })
+    // Additional password check: No spaces in the password
+    if (trimmedPassword.includes(' ')) {
+      setError('Password cannot contain spaces.');
+      return false;
+    }
 
-// })
+    // Additional email and password length checks
+    const maxEmailLength = 50; // Set your desired maximum email length
+    const maxPasswordLength = 20; // Set your desired maximum password length
 
-//   return (
-//     <div className='plain'>
-//       <form action="action_page.php" method="post">
-//   <div class="imgcontainer">
-//     <img src="img_avatar2.png" alt="Avatar" class="avatar"/>
-//   </div>
+    if (trimmedEmail.length > maxEmailLength) {
+      setError(`Email must be at most ${maxEmailLength} characters long.`);
+      return false;
+    }
 
-//   <div class="container">
-//     <label for="uname"><b>Email</b></label>
-//     <input type="text" placeholder="Enter Email" name="uname" required onChange={(event)=> setEmail(event.target.value)}/>
+    if (trimmedPassword.length > maxPasswordLength) {
+      setError(`Password must be at most ${maxPasswordLength} characters long.`);
+      return false;
+    }
 
-//     <label for="psw"><b>Password</b></label>
-//     <input type="password" placeholder="Enter Password" name="psw" required onChange={(event)=> setPassword(event.target.value)}/>
+    setError(null);
+    return true;
+  };
 
-//     <Link to='/home'><button type="submit" onClick={login}>Login</button></Link>
+  const login = () => {
+    if (validateForm()) {
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          alert('Log in successfully');
+          navigate('/home');
+        })
+        .catch(() => {
+          setError('Invalid email or password. Please try again.');
+        });
+    }
+  };
 
-//   </div>
+  return (
+    <div>
+      <form className="sign_in_form" action="action_page.php">
+        <div className="container">
+          <h1 className="register">Log In</h1>
+          <p className="rtext">Please fill in this form to log in to your account.</p>
+          <div style={{ marginTop: '30px' }}>
+            <label htmlFor="email">
+              <b>Email</b>
+            </label>
+            <input
+              type="text"
+              placeholder="Enter Email"
+              name="email"
+              id="email"
+              value={email}
+              required
+              onChange={(event) => setEmail(event.target.value)}
+              aria-label="Email"
+            />
 
-//   <div class="container" >
-//     {/* <button type="button" class="cancelbtn">Cancel</button> */}
-//     <Link to='/forgotpassword'><span class="psw">Forgot  <a href="#">password?</a></span></Link>
-//   </div>
-// </form>
-//     </div>
-const navigate = useNavigate();
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
+            <label htmlFor="psw">
+              <b>Password</b>
+            </label>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              name="psw"
+              id="psw"
+              value={password}
+              required
+              onChange={(event) => setPassword(event.target.value)}
+              aria-label="Password"
+            />
 
-const login = (() =>{
+            {error && <div className="error-message">{error}</div>}
+          </div>
+          <Link to="/registration">
+            <p>
+              Don't have an account? <a href="#">Create Account</a>.
+            </p>
+          </Link>
+          <button
+            type="button"
+            className="registerbtn"
+            style={{ marginTop: '30px', marginBottom: '-40px' }}
+            onClick={login}
+          >
+            Log In
+          </button>
+          <Link to="/forgotpassword">
+            <span className="psw" style={{ marginTop: '-20px' }}>
+              Forgot <a href="#">password?</a>
+            </span>
+          </Link>
+        </div>
+      </form>
+    </div>
+  );
+};
 
-  signInWithEmailAndPassword( auth, email, password).then(() =>{
-    alert('Log in successfully')
-    navigate("/home");
-
-  }).catch((error)=>{
-    console.log(error.massage)
-  })
-
-})
-return (
-  <div>
-    <form className="sign_in_form" action="action_page.php">
-<div className="container">
-  <h1 className='register'>Log In</h1>
-  <p className='rtext'>Please fill in this form to login in to account.</p>
-  
-
-  <label for="email"><b>Email</b></label>
-  <input type="text" placeholder="Enter Email" name="email" id="email" required onChange={(event)=> setEmail(event.target.value)}/>
-
-  <label for="psw"><b>Password</b></label>
-  <input type="password" placeholder="Enter Password" name="psw" id="psw" required onChange={(event)=> setPassword(event.target.value)}/>
-
-  {/* <label for="psw-repeat"><b>Repeat Password</b></label>
-  <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required/>
-   */}
-
-  <p>Administrator <a href="#">LogIn</a>.</p>
-  <Link to='/login'><button type="submit" class="registerbtn" onClick={login}>Log In</button></Link>
-  <Link to='/forgotpassword'><span class="psw">Forgot  <a href="#">password?</a></span></Link>
-</div>
-
-</form>
-  </div>
-  )
-}
-
-export default Login
+export default Login;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useState, useEffect} from 'react'
 import { Link } from "react-router-dom";
 import logo from "../Assets/images/logo.png";
 import img1 from "../Assets/images/elegant-hotel-room-with-window.jpg";
@@ -7,11 +7,18 @@ import img3 from "../Assets/images/interior-modern-comfortable-hotel-room.jpg";
 import img4 from "../Assets/images/3d-rendering-luxury-bedroom-suite-resort-hotel-with-twin-bed-living.jpg";
 import img5 from "../Assets/images/bangkok-thailand-august-12-2016-beautiful-luxury-bedroom-int.jpg";
 import img6 from "../Assets/images/(Really)-Great (1).jfif";
-import { auth } from '../config/firebase'
+import { auth } from '../config/firebase';
+import { useNavigate } from 'react-router-dom';
+import imgAct4 from "../Assets/icons/whatsapp.png";
+import imgAct5 from "../Assets/icons/facebook.png";
+import imgAct6 from "../Assets/icons/twitter.png";
+import imgAct7 from "../Assets/icons/email.png";
 
 
 const Home = () => {
 
+  const navigation = useNavigate()
+   
   const handleSignOut = async () => {
     try {   
       await auth.signOut(); // Sign out the user
@@ -23,6 +30,24 @@ const Home = () => {
     }
   };
 
+
+  const [checkIn ,setCheckIn] = useState("");
+  const [checkOut ,setCheckOut] = useState("");
+  const [number , setNumber] = useState(1);
+  const [data, setData] = useState({})
+
+  useEffect(() => {
+    setData({
+      checkIn : checkIn,
+      checkOut : checkOut,
+      number : number,    
+    })
+  })
+  
+  function goToRoom () {
+    navigation("/room",data)
+  }
+
   return (
     <div>
       <div className='divtwo'>
@@ -32,8 +57,8 @@ const Home = () => {
 
             
             <Link to="/features"><button className='link'>Features</button></Link>
-            <Link to="/contact" className='link'><button>Contact Us</button></Link>
-            <Link to="/"><button className='logout' onClick={handleSignOut}>Log Out</button></Link>
+            <Link to="/profile" className='link'><button>Profile</button></Link>
+            <Link to="/" ><button className='logout' onClick={handleSignOut}>Log Out</button></Link>
 
           </nav>
         </div>
@@ -51,23 +76,35 @@ const Home = () => {
         </div>
         <div className='KING'>
           <form className='the-form'>
+            <div style={{marginRight: "30px",marginLeft: "-190px"}}>
+              <h3>Check In</h3>
+            <input
+              style={{ margin: '0 auto 50px auto', borderColor: '#A87539' }}
+              name='class'
+              type='date' 
+              min={new Date().toISOString().split("T")[0]}
+              onClick={(event) => setCheckIn(event.target.value)}
+            /></div>
+            <div style={{marginRight: "30px"}}>
+              <h3>Check Out</h3>
             <input
               style={{ margin: '0 auto 50px auto', borderColor: '#A87539' }}
               name='class'
               type='date'
-            />
-            <input
-              style={{ margin: '0 auto 50px auto', borderColor: '#A87539' }}
-              name='class'
-              type='date'
-            />
+              min={new Date().toISOString().split("T")[0]}
+              onClick={(event) => setCheckOut(event.target.value)}
+            /></div>
+            <div style={{marginRight: "30px"}}>
+            <h3>Number Of People</h3>
             <input
               style={{ margin: '0 auto 50px auto', borderColor: '#A87539' }}
               name='class'
               type='number'
-            />
-            <Link to="/room"><button style={{ margin: '0 auto 50px auto' }} className='now'>Avalible Rooms</button></Link>
-
+              onClick={(event) => setNumber(event.target.value)}
+            /></div>
+            <div style = {{marginRight:"-380px", marginBottom: "-50px", marginLeft: "100px"}}>
+            <button style={{ margin: '0 auto 50px auto' }} onClick={goToRoom} className='now'>Avalible Rooms</button>
+            </div>
           </form>
         </div>
         {/* <h1>This is the home page</h1> */}
@@ -208,25 +245,25 @@ const Home = () => {
           </div>
           <div className='act'>
             <div style={{ flexDirection: 'row', display: 'flex', height: '94px', width: '446px' }}>
-              <div className='imgAct4'></div>
+              <div className='imgAct4' style={{ width: '50px',height: '50px'}}></div>
               <div>
                 <h3 className='most'>+081-453-0011</h3>
               </div>
             </div>
             <div style={{ flexDirection: 'row', display: 'flex', height: '94px', width: '446px' }}>
-              <div className='imgAct5'></div>
+              <div className='imgAct5' style={{ width: '50px',height: '50px'}}></div>
               <div>
                 <h3 className='most'>@Ethereal-Palazzo.com</h3>
               </div>
             </div>
             <div style={{ flexDirection: 'row', display: 'flex', height: '94px', width: '446px' }}>
-              <div className='imgAct6'></div>
+              <div className='imgAct6' style={{ width: '50px',height: '50px'}}></div>
               <div>
                 <h3 className='most'>#Ethereal-Palazzo.com</h3>
               </div>
             </div>
             <div style={{ flexDirection: 'row', display: 'flex', height: '94px', width: '446px' }}>
-              <div className='imgAct7'></div>
+              <div className='imgAct7' style={{ width: '50px',height: '50px'}}></div>
               <div>
                 <h3 className='most'>@Ethereal-Palazzo/real.com</h3>
               </div>

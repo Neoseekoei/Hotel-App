@@ -1,161 +1,196 @@
 import React, { useState, useEffect } from "react";
-import { addDoc,getDocs ,collection } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { db } from "../config/firebase";
-function Details() {
-  const [count, setCount] = useState(1);
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [date, setDate] = useState("");
-  const [number, setNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const CheckOut = async () => {
+import { signOut } from "firebase/auth";
+import { auth } from "../config/firebase";
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../config/firebase';
+import { getAuth } from 'firebase/auth'
+import { Link } from "react-router-dom";
+
+
+import { useNavigate} from "react-router-dom";
+function Admin() {
+  const [cart, setCart] = useState([]);
+  const navigate =  useNavigate()
+  const Signout = () => {
+    signOut(auth)
+      .then(() => {
+        alert('Log out successful');
+       navigate("/");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+  const fetchCartData = async () => {
     try {
-      const authUser = getAuth().currentUser;
-      if (authUser) {
-        const docRef = await getDocs(collection(db, "Cart" + authUser.uid), {
-          owner_uid: authUser.uid,
-          Name: name,
-          Price: date,
-          Amount: count,
-          Number: number,
-          Address: address,
-        });
-        console.log("Document written with ID: ", docRef.id);
-      } else {
-        console.error("User not authenticated");
-      }
-    } catch (e) {
-      console.error("Error adding document: ", e);
+      const querySnapshot = await getDocs(collection(db, "Cart"));
+      const newData = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      const filteredData = query
+        ? newData.filter((item) => {
+            const itemDate = new Date(item.Date);
+            const inputDate = new Date(query);
+            return (
+              itemDate.getFullYear() === inputDate.getFullYear() &&
+              itemDate.getMonth() === inputDate.getMonth() &&
+              itemDate.getDate() === inputDate.getDate()
+            );
+          })
+        : newData;
+      console.log("Filtered Data:", filteredData);
+      setCart(filteredData);
+    } catch (error) {
+      alert("Error fetching data: " + error.message);
+      console.error("Error fetching menu: ", error);
     }
   };
+  useEffect(() => {
+    // Fetch data when the component mounts
+    fetchCartData();
+  }, []);
+  const [query, setQuery] = useState("");
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor:"#856d45",
+        marginLeft:"140px",
+        marginTop:"100px",
+        paddingBottom:"80px"
+      }}
+    >
       <div className="top">
-        <h1 className="text">Aston</h1>
-        <div className="button" style={{ marginBottom: "20px" }}>
-          <button className="btn">Home</button>
-          <button className="btn" style={{ marginLeft: "13px" }}>
-            About Us
-          </button>
-          <button className="btn" style={{ marginRight: "50px" }}>
-            Rooms
+        <div
+          className="button"
+          style={{ display: "flex", flexDirection: "row" }}
+        >
+          <h1 className="maintext" style={{ marginRight: "520px" }}>
+            Admin Page
+          </h1>
+          <button
+            className="btn2"
+            onClick={Signout}
+            style={{ marginTop: "30px",marginLeft:"320px" }}
+          >
+            Log Out
           </button>
         </div>
       </div>
-      <div className="main">
-        <div className="left1">
-        <img  className="left1" src="https://reactjs.org/logo-og.png" alt="React Image" />
-            <h1 className="maintext2">Room Name</h1>
-            <h2 className="maintext3">Description</h2>
-            <p className="paragraph">the</p>
-        </div>
-        <div className="right1">
+      <form
+       
+       style={{ alignItems: "center", marginBottom: "20px" }}
+       onSubmit={(e) => {
+         e.preventDefault();
+         fetchCartData();
+       }}
+     >
+       {/* <input
+         type="date"
+         placeholder="Search..."
+         value={query}
+         onChange={(e) => setQuery(e.target.value)}
+       />
+       <button type="submit" className="submitBtn">
+         Submit
+       </button> */}
+     </form>
+      <div
+        className="admin"
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          backgroundColor: "whitesmoke",
+          borderRadius: "15px",
+          paddingRight: "10px",
+          height: "600px",
+        }}
+      >
+        <div className="left3">
           <div
+            className="btnRoom"
             style={{
               display: "flex",
-              flexDirection: "row",
-              paddingLeft: "40px",
-              paddingRight: "40px",
+              flexDirection: "column",
+              marginTop: "30px",
+              height: "700px",
+              marginRight: "30px",
             }}
           >
-            <h1 className="text3" style={{marginTop: '36px'}}>
-              TOTAL
-              <br />
-              PRICE
-            </h1>
-            <h1 className="maintext1" style={{ marginLeft: "80px" }}>
-              R450.99
-            </h1>
-          </div>
-          _____________________________________________________________
-          <form>
-            <label
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                fontSize: "30px",
-                fontWeight: "bold",
-              }}
-            >
-              NAME
-            </label>
-            <input
-              placeholder="Name..."
-              className="input"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <label
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                fontSize: "24px",
-                fontWeight: "bold",
-                marginBottom: "10px"
-              }}
-            >
-              PHONE NO.
-            </label>
-            <input
-              placeholder="Number..."
-              className="input"
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-            />
-            <label
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                fontSize: "24px",
-                fontWeight: "bold",
-                marginBottom: "10px"
-              }}
-            >
-              ADDRESS
-            </label>
-            <input
-              placeholder="Address..."
-              className="input"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <label
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                fontSize: "24px",
-                fontWeight: "bold",
-                marginBottom: "10px"
-              }}
-            >
-              DATE
-            </label>
-            <input
-              placeholder="Name..."
-              className="input"
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
-          </form>
-          <div className="count">
             <button
-              className="plus"
-              onClick={() => setCount(Math.max(count - 1, 1))}
+              style={{ marginTop: "40px", marginBottom: "20px" }}
+              className="btn4"
             >
-              -
+              Bookings
             </button>
-            <h1 className="number">{count}</h1>
-            <button className="plus" onClick={() => setCount(count + 1)}>
-              +
-            </button>
+            {/* <button
+              style={{ marginTop: "10px", marginBottom: "20px" }}
+              className="btn4"
+            >
+              Rooms
+            </button> */}
           </div>
-          <button className="button1" onClick={CheckOut}>Book Now!</button>
+        </div>
+        <div className="right3">
+          <table style={{ width: "1000px", paddingTop: "20px" }}>
+            <thead
+              style={{
+                backgroundColor: "#654622",
+                color: "#fff",
+                margin: "10px",
+              }}
+            >
+              <tr>
+                <th className="tablehead" style={{ padding: 10 }}>
+                  Name
+                </th>
+                <th className="tablehead" style={{ padding: 10 }}>
+                Phone No.
+                </th>
+                <th className="tablehead" style={{ padding: 10 }}>
+                  Message
+                </th>
+                <th className="tablehead" style={{ padding: 10 }}>
+                  Total Price
+                </th>
+                <th className="tablehead" style={{ padding: 10 }}>Room Name</th>
+                <th className="tablehead" style={{ padding: 10 }}>
+                  Number of Nights
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart.filter((item) => {
+      if (!query) {
+        // If no date input, show all records
+        return true;
+      }
+      // Parse dates and compare
+      const itemDate = new Date(item.Date);
+      const inputDate = new Date(query);
+      // Check if the item's date matches the input date
+      return (
+        itemDate.getFullYear() === inputDate.getFullYear() &&
+        itemDate.getMonth() === inputDate.getMonth() &&
+        itemDate.getDate() === inputDate.getDate()
+      );
+    }).map((cart) =>(
+              <tr  key={cart.id} style={{backgroundColor:"lightgray"}}>
+                    <td style={{paddingLeft:"40px"}}>{cart.Name}</td>
+                    <td style={{paddingLeft:"40px"}}>{cart.Phone}</td>
+                    <td style={{paddingLeft:"40px"}}>{cart.Message}</td>
+                    <td style={{paddingLeft:"40px"}}>R{cart.Total}</td>
+                    <td style={{paddingLeft:"40px"}}>{cart.RoomName}</td>
+                    <td style={{paddingLeft:"40px"}}>{cart.Count}</td>
+              </tr>
+              ))}
+              </tbody>
+          </table>
         </div>
       </div>
-      <div className="about"></div>
     </div>
   );
 }
-export default Details;
+export default Admin;

@@ -1,43 +1,64 @@
-import React from 'react'
-import  { useState } from 'react';
-import { auth } from '../config/firebase';
+import React, { useState } from 'react';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import { auth } from '../config/firebase';
+import { useNavigate, Link } from 'react-router-dom';
 
 const ForgotPassword = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState(null);
 
-  const forgotPassword = (()=>{
-    sendPasswordResetEmail(auth, email).then(()=> {
-      alert("Check your email")
-
-    }).catch((error)=>{
-
-    })
-  })
-
-    const [showPassword, setShowPassword] = useState(false);
-
-    const handleShowPassword = () => {
-      setShowPassword(!showPassword);
+  const validateForm = () => {
+    if (!email) {
+      setError('Please enter your email.');
+      return false;
     }
-    
-   const [email, setPassword] = useState('')
-  return (
-    <div className="forgot-password-container">
-      <h1>Forgot Password</h1>
-      <form >
-        {/* <label>
-          New Password:
-          <input type="password" value={email} onChange={handleEmailChange} />
-        </label> */}
-        <input type="text" placeholder="Enter email" onChange={(event)=>setPassword(event.target.value)}/>
 
-        Password: <input type={showPassword ? "text" : "password"}  id="myInput"/>
-        <input type="checkbox" onChange={handleShowPassword} />Show Password
-        <Link to='/login'><button type="button" onClick={forgotPassword}>Reset Password</button></Link>
+    // Email validation
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    if (!emailRegex.test(email)) {
+      setError('Please enter a valid email address.');
+      return false;
+    }
+
+    setError(null);
+    return true;
+  };
+
+  const handleResetPassword = () => {
+    if (validateForm()) {
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          alert('Password reset email sent successfully');
+          navigate('/login'); // Redirect to your login page or any other page
+        })
+        .catch((error) => {
+          setError(`Error sending password reset email: ${error.message}`);
+        });
+    }
+  };
+
+  return (
+    <div style={{}}>
+     
+      <form  className='ForgotPasswordContainer'>
+         <h2>Forgot Password</h2>
+         
+        <label>Email:</label>
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <p style={{ color: 'red' }}>{error}</p>
+        <button type="button" onClick={handleResetPassword}>
+          Reset Password
+        </button>
       </form>
+      
     </div>
-  )
-}
+  );
+};
 
 export default ForgotPassword;
